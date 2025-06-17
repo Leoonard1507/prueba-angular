@@ -1,0 +1,30 @@
+.login {
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid #00177d;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #f3f3f3; 
+}
+
+app-input {
+  margin: 5px 0;
+  font-size: 20px;
+}
+
+button {
+  width: 30rem;
+  margin: 5px auto;
+  border-radius: 10px;
+  border: none;
+  background-color: #00177d; 
+  color: #ffffff;            
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0331ff;
+}

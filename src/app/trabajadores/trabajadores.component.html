@@ -1,0 +1,6 @@
+<!-- Crear un div por cada elemento del arrai, se recorren con un bucle for -->
+<div *ngFor="let trabajador of trabajadores" class="trabajador-card">
+  <img [src]="trabajador.foto_url" alt="Foto de {{trabajador.nombre}}" />
+  <h4>{{ trabajador.nombre }} {{ trabajador.apellidos }}</h4>
+  <p class="servicios">{{ trabajador.servicios_asignados.join(', ') }}</p>
+</div>
