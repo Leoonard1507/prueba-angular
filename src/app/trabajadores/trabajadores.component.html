@@ -1,10 +1,15 @@
-<!-- Input para realizar la búsqueda por filtro -->
-<input 
-  type="text" 
-  placeholder="Buscar por servicio..." 
-  [(ngModel)]="filtroServicio"
-  class="buscador"
-/>
+<!-- Radio buttons para seleccionar el tipo de filtro -->
+<div>
+  <label>
+    <input type="radio" name="filtroTipo" [(ngModel)]="tipoFiltro" value="profesional" /> Profesional
+  </label>
+  <label>
+    <input type="radio" name="filtroTipo" [(ngModel)]="tipoFiltro" value="especialidad" /> Especialidad
+  </label>
+</div>
+
+<!-- Input único para buscar -->
+<input [(ngModel)]="textoFiltro" placeholder="Buscar..." />
 
 <!-- Crear un div por cada elemento del array, se recorren con un bucle for -->
 <div *ngFor="let trabajador of trabajadoresFiltrados()" class="trabajador-card">

@@ -28,8 +28,10 @@ export class TrabajadoresComponent implements OnInit {
 
   // Array para almacenar los trabajadores cargados desde localStorage
   trabajadores: Trabajador[] = [];
-  // Variable que trae el valor del inpurt
-  filtroServicio: string = '';
+  // Variable para definir por que parámetro se va a filtrar
+  tipoFiltro: 'profesional' | 'especialidad' = 'profesional';
+  // Variable a la que se le asigna la palabra por la que se busca
+  textoFiltro: string = '';
 
   // Método que se ejecuta automáticamente al iniciar el componente
   ngOnInit() {
@@ -40,20 +42,27 @@ export class TrabajadoresComponent implements OnInit {
     this.trabajadores = data ? JSON.parse(data) : [];
   }
 
-  // Función para filtrar por servicios
   trabajadoresFiltrados() {
-    // Si no hay filtro devuelve todos los trabajadores
-    if (!this.filtroServicio.trim()) return this.trabajadores;
+    // Se guarda en texto lo que contiene textoFiltro, limpio y en minúsculas
+    const texto = this.textoFiltro.trim().toLowerCase();
+    // Si no hay texto que se muestren todos los trabajadores
+    if (!texto) return this.trabajadores;
 
-    // Se guarda lo que se trae del filtro 
-    const filtro = this.filtroServicio.toLowerCase();
 
-    // Se devuelven los trabajadores que tengan al menos un servicio que coincida (parcialmente) con el filtro
-    return this.trabajadores.filter(trabajador =>
-      trabajador.servicios_asignados.some(servicio =>
-        servicio.toLowerCase().includes(filtro)
-      )
-    );
+    return this.trabajadores.filter(trabajador => {
+      // Se comprueba el tipo de filtro
+      if (this.tipoFiltro === 'profesional') {
+        // En el caso de ser por profesional devuelve por nombre o por apellido
+        return (
+          trabajador.nombre.toLowerCase().includes(texto) ||
+          trabajador.apellidos.toLowerCase().includes(texto)
+        );
+      // Si es por especialidad, comprueba si algún servicio incluye el texto de búsqueda
+      } else {
+        return trabajador.servicios_asignados.some(servicio =>
+          servicio.toLowerCase().includes(texto)
+        );
+      } 
+    });
   }
-
 }
