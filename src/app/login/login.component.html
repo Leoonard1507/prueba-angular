@@ -1,8 +1,12 @@
 <div class="login">
-  <h1>Iniciar sesión</h1>
-  <app-input type="text" placeholder="Introducir nombre de usuario" label="Usuario"></app-input>
-  <app-input type="password" placeholder="Introducir contraseña" label="Contraseña"></app-input>
-  <button type="submit">Enviar</button>
+  <h2>Iniciar sesión</h2>
+  <form (ngSubmit)="login()" #loginForm="ngForm">
+    <input type="email" [(ngModel)]="email" name="email" required placeholder="Correo" />
+    <input type="password" [(ngModel)]="password" name="password" required placeholder="Contraseña" />
+    <button type="submit">Entrar</button>
+    <p *ngIf="error" style="color:red">{{ error }}</p>
+  </form>
 </div>
+
 
 <router-outlet></router-outlet>
