@@ -1,0 +1,10 @@
+<h2>Lista de Profesionales</h2>
+
+<div *ngFor="let trabajador of trabajadores" class="trabajador-card">
+  <img [src]="trabajador.foto_url" alt="Foto de {{ trabajador.nombre }}" width="100" />
+  <h3>{{ trabajador.nombre }} {{ trabajador.apellidos }}</h3>
+  <p><strong>Email:</strong> {{ trabajador.email }}</p>
+  <p><strong>Teléfono:</strong> {{ trabajador.telefono }}</p>
+  <p><strong>Servicios:</strong> {{ trabajador.servicios_asignados.join(', ') }}</p>
+  <p><strong>Rol:</strong> {{ trabajador.rol }}</p>
+</div>

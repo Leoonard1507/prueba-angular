@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 // Crear una interfaz con los parámetros de los trabajadores
-interface Trabajador {
+export interface Trabajador {
   nombre: string;
   apellidos: string;
   email: string;
