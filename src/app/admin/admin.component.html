@@ -1,2 +1,2 @@
-<app-trabajador-add></app-trabajador-add>
-<app-trabajador-list></app-trabajador-list>
+<app-trabajador-add (trabajadorAñadido)="actualizarLista()"></app-trabajador-add>
+<app-trabajador-list [trabajadores]="trabajadores"></app-trabajador-list>

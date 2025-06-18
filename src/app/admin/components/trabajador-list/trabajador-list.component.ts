@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TrabajadorService } from 'src/app/services/trabajador.service';
 import { Trabajador } from 'src/app/trabajadores/trabajadores.component';
@@ -24,7 +24,7 @@ export class TrabajadorListComponent {
     'domingo'
   ];
   // Crear un array con elementos de tipo trabajador
-  trabajadores: Trabajador[] = [];
+  @Input() trabajadores: Trabajador[] = [];
 
   // Constructor qu obtienen los servicios de tipo TrabajadorService
   constructor(private trabajadorService: TrabajadorService) { }

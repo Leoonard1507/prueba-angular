@@ -1,17 +1,71 @@
-<form (ngSubmit)="agregarTrabajador()" #trabajadorForm="ngForm">
-  <input type="text" name="nombre" [(ngModel)]="nuevoTrabajador.nombre" placeholder="Nombre" required>
-  <input type="text" name="apellidos" [(ngModel)]="nuevoTrabajador.apellidos" placeholder="Apellidos" required>
-  <input type="email" name="email" [(ngModel)]="nuevoTrabajador.email" placeholder="Email" required>
-  <input type="text" name="telefono" [(ngModel)]="nuevoTrabajador.telefono" placeholder="Teléfono" required>
-  <input type="text" name="foto_url" [(ngModel)]="nuevoTrabajador.foto_url" placeholder="URL Foto" required>
-  <input type="password" name="password" [(ngModel)]="nuevoTrabajador.password" placeholder="Contraseña" required>
-  <input type="text" name="rol" [(ngModel)]="nuevoTrabajador.rol" placeholder="Rol" required>
-  <input type="text" name="servicios" [(ngModel)]="serviciosInput" placeholder="Servicios" required>
-  <div *ngFor="let dia of diasSemana">
-    <label>{{ dia }}:</label>
-    <input type="text" [(ngModel)]="nuevoTrabajador.horario[dia]" name="horario_{{dia}}"
-      placeholder="Ej: 09:00-14:00" />
+<form [formGroup]="trabajadorForm" (ngSubmit)="agregarTrabajador()">
+  <!-- Nombre -->
+  <input type="text" formControlName="nombre" placeholder="Nombre" />
+  <div *ngIf="trabajadorForm.get('nombre')?.touched && trabajadorForm.get('nombre')?.invalid" class="error">
+    {{ getErrorMessage('nombre') }}
   </div>
 
-  <button type="submit">Agregar Trabajador</button>
+  <!-- Apellidos -->
+  <input type="text" formControlName="apellidos" placeholder="Apellidos" />
+  <div *ngIf="trabajadorForm.get('apellidos')?.touched && trabajadorForm.get('apellidos')?.invalid" class="error">
+    {{ getErrorMessage('apellidos') }}
+  </div>
+
+  <!-- Email -->
+  <input type="email" formControlName="email" placeholder="Email" />
+  <div *ngIf="trabajadorForm.get('email')?.touched && trabajadorForm.get('email')?.invalid" class="error">
+    {{ getErrorMessage('email') }}
+  </div>
+
+  <!-- Teléfono -->
+  <input type="text" formControlName="telefono" placeholder="Teléfono" />
+  <div *ngIf="trabajadorForm.get('telefono')?.touched && trabajadorForm.get('telefono')?.invalid" class="error">
+    {{ getErrorMessage('telefono') }}
+  </div>
+
+  <!-- Foto URL -->
+  <input type="text" formControlName="foto_url" placeholder="URL Foto" />
+  <div *ngIf="trabajadorForm.get('foto_url')?.touched && trabajadorForm.get('foto_url')?.invalid" class="error">
+    {{ getErrorMessage('foto_url') }}
+  </div>
+
+  <!-- Contraseña -->
+  <input type="password" formControlName="password" placeholder="Contraseña" />
+  <div *ngIf="trabajadorForm.get('password')?.touched && trabajadorForm.get('password')?.invalid" class="error">
+    {{ getErrorMessage('password') }}
+  </div>
+
+  <!-- Rol -->
+  <label>Rol:</label>
+  <select formControlName="rol">
+    <option value="">-- Selecciona un rol --</option>
+    <option *ngFor="let rol of rolesDisponibles" [value]="rol">
+      {{ rol }}
+    </option>
+  </select>
+  <div *ngIf="trabajadorForm.get('rol')?.touched && trabajadorForm.get('rol')?.invalid" class="error">
+    {{ getErrorMessage('rol') }}
+  </div>
+
+  <!-- Servicios -->
+  <label>Servicios:</label>
+  <select formControlName="servicios" multiple>
+    <option *ngFor="let servicio of serviciosDisponibles" [value]="servicio">
+      {{ servicio }}
+    </option>
+  </select>
+  <div *ngIf="trabajadorForm.get('servicios')?.touched && trabajadorForm.get('servicios')?.invalid" class="error">
+    {{ getErrorMessage('servicios') }}
+  </div>
+
+  <!-- Horario -->
+  <div formGroupName="horario">
+    <div *ngFor="let dia of diasSemana">
+      <label>{{ dia }}:</label>
+      <input type="text" [formControlName]="dia" placeholder="Ej: 09:00-14:00" />
+    </div>
+  </div>
+
+  <!-- Botón -->
+  <button type="submit" [disabled]="trabajadorForm.invalid">Agregar Trabajador</button>
 </form>

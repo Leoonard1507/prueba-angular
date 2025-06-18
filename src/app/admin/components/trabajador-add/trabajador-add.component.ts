@@ -1,67 +1,109 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { TrabajadorService } from 'src/app/services/trabajador.service';
 import { Trabajador } from 'src/app/trabajadores/trabajadores.component';
+import { EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-trabajador-add',
   templateUrl: './trabajador-add.component.html',
   styleUrls: ['./trabajador-add.component.css'],
   standalone: true,
-  imports: [FormsModule, CommonModule]
+  imports: [ReactiveFormsModule, CommonModule]
 })
 export class TrabajadorAddComponent {
-// Crear un array con elementos de tipo trabajador
-  trabajadores: Trabajador[] = [];
-  //Crear un objeto con los parámetros de los nuevos trabajadores
-  nuevoTrabajador: Trabajador = {
-    nombre: '',
-    apellidos: '',
-    email: '',
-    telefono: '',
-    foto_url: '',
-    servicios_asignados: [],
-    horario: {},
-    rol: '',
-    password: ''
-  };
-  // Variable con los días de la semana para mostrarlos en el formulario
+  @Output() trabajadorAñadido = new EventEmitter<void>();
+
+  trabajadorForm: FormGroup;
+
   diasSemana: string[] = [
-    'lunes',
-    'martes',
-    'miércoles',
-    'jueves',
-    'viernes',
-    'sábado',
+    'lunes', 
+    'martes', 
+    'miércoles', 
+    'jueves', 
+    'viernes', 
+    'sábado', 
     'domingo'
   ];
-  // Variable para guardar los servicios asignados como string para posteriormente dividirlos
-  serviciosInput: string = '';
 
-  // Constructor qu obtienen los servicios de tipo TrabajadorService
-  constructor(private trabajadorService: TrabajadorService) {}
+  serviciosDisponibles = [
+    'Cambio de aceite',
+    'Revisión de frenos',
+    'Alineación y balanceo',
+    'Reparación de motor',
+    'Mantenimiento general',
+    'Diagnóstico electrónico',
+    'Cambio de neumáticos',
+    'Reparación de transmisión',
+    'Servicio de suspensión',
+    'Revisión de aire acondicionado'
+  ];
+  rolesDisponibles = ['admin', 'profesional'];
 
+  constructor(private fb: FormBuilder, private trabajadorService: TrabajadorService) {
+    this.trabajadorForm = this.fb.group({
+      nombre: ['', [Validators.required, Validators.minLength(2)]],
+      apellidos: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      telefono: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]], // 9 dígitos
+      foto_url: ['', Validators.required],
+      servicios: [[], Validators.required],
+      rol: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      horario: this.fb.group(
+        this.diasSemana.reduce((acc, dia) => {
+          acc[dia] = ['']; // sin validación, puedes agregar si quieres
+          return acc;
+        }, {} as { [key: string]: any })
+      )
+    });
+  }
 
-  // Función para agregar un nuevo trabajador
+  getErrorMessage(controlName: string): string {
+    const control = this.trabajadorForm.get(controlName);
+    if (!control || !control.errors) return '';
+
+    if (control.errors['required']) return `El campo ${controlName} es obligatorio.`;
+
+    if (control.errors['minlength']) {
+      return `El campo ${controlName} debe tener al menos ${control.errors['minlength'].requiredLength} caracteres.`;
+    }
+
+    if (control.errors['email']) return `El email no es válido.`;
+
+    if (control.errors['pattern']) {
+      if (controlName === 'telefono') {
+        return 'El teléfono debe tener 9 dígitos numéricos.';
+      }
+      return `El formato del campo ${controlName} es incorrecto.`;
+    }
+
+    return '';
+  }
+
   agregarTrabajador() {
-    // Dividir los servicios asignados por comas y eliminar los espacios en blando
-    this.nuevoTrabajador.servicios_asignados = this.serviciosInput.split(',').map(s => s.trim());
-    // Añadir el trabajador mediante la función creada en service
-    this.trabajadorService.addTrabajador(this.nuevoTrabajador);
-    // Limpiar los campos del formulario
-    this.nuevoTrabajador = {
-      nombre: '',
-      apellidos: '',
-      email: '',
-      telefono: '',
-      foto_url: '',
-      servicios_asignados: [],
-      horario: {},
-      rol: '',
-      password: ''
+    if (this.trabajadorForm.invalid) {
+      this.trabajadorForm.markAllAsTouched();
+      return;
+    }
+
+    const formValues = this.trabajadorForm.value;
+
+    const nuevoTrabajador: Trabajador = {
+      nombre: formValues.nombre,
+      apellidos: formValues.apellidos,
+      email: formValues.email,
+      telefono: formValues.telefono,
+      foto_url: formValues.foto_url,
+      servicios_asignados: formValues.servicios,
+      horario: formValues.horario,
+      rol: formValues.rol,
+      password: formValues.password,
     };
-    // Obtener otra vez los trabajadores actualizados
-    this.trabajadores = this.trabajadorService.getTrabajadores();
+
+    this.trabajadorService.addTrabajador(nuevoTrabajador);
+    this.trabajadorAñadido.emit();
+    this.trabajadorForm.reset();
   }
 }
