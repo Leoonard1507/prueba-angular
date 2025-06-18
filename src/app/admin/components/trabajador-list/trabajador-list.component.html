@@ -1,5 +1,5 @@
 <h2>Lista de Profesionales</h2>
-<div *ngFor="let trabajador of trabajadores" class="trabajador-card">
+<div *ngFor="let trabajador of trabajadores; let i = index" class="trabajador-card">
   <img [src]="trabajador.foto_url" alt="Foto de {{ trabajador.nombre }}" width="100" />
   <h3>{{ trabajador.nombre }} {{ trabajador.apellidos }}</h3>
   <p><strong>Email:</strong> {{ trabajador.email }}</p>
@@ -12,4 +12,5 @@
       {{ dia }}: {{ trabajador.horario[dia] || 'No asignado' }}
     </li>
   </ul>
+  <button (click)="eliminarTrabajador(i)">Eliminar</button>
 </div>

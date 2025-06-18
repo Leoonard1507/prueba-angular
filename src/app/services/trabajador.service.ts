@@ -19,4 +19,11 @@ export class TrabajadorService {
     trabajadores.push(trabajador);
     localStorage.setItem(this.storageKey, JSON.stringify(trabajadores));
   }
+
+  // Función para eliminar un trabajador
+  deleteTrabajador(index: number): void {
+    const trabajadores = this.getTrabajadores();
+    trabajadores.splice(index, 1);
+    localStorage.setItem(this.storageKey, JSON.stringify(trabajadores));
+  }
 }
