@@ -1,0 +1,17 @@
+<form (ngSubmit)="agregarTrabajador()" #trabajadorForm="ngForm">
+  <input type="text" name="nombre" [(ngModel)]="nuevoTrabajador.nombre" placeholder="Nombre" required>
+  <input type="text" name="apellidos" [(ngModel)]="nuevoTrabajador.apellidos" placeholder="Apellidos" required>
+  <input type="email" name="email" [(ngModel)]="nuevoTrabajador.email" placeholder="Email" required>
+  <input type="text" name="telefono" [(ngModel)]="nuevoTrabajador.telefono" placeholder="Teléfono" required>
+  <input type="text" name="foto_url" [(ngModel)]="nuevoTrabajador.foto_url" placeholder="URL Foto" required>
+  <input type="password" name="password" [(ngModel)]="nuevoTrabajador.password" placeholder="Contraseña" required>
+  <input type="text" name="rol" [(ngModel)]="nuevoTrabajador.rol" placeholder="Rol" required>
+  <input type="text" name="servicios" [(ngModel)]="serviciosInput" placeholder="Servicios" required>
+  <div *ngFor="let dia of diasSemana">
+    <label>{{ dia }}:</label>
+    <input type="text" [(ngModel)]="nuevoTrabajador.horario[dia]" name="horario_{{dia}}"
+      placeholder="Ej: 09:00-14:00" />
+  </div>
+
+  <button type="submit">Agregar Trabajador</button>
+</form>

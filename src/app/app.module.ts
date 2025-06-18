@@ -5,8 +5,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { TrabajadoresComponent } from './trabajadores/trabajadores.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { AdminComponent } from './admin/admin.component';
 import { FormsModule } from '@angular/forms';
+import { TrabajadorListComponent } from './admin/components/trabajador-list/trabajador-list.component';
+import { TrabajadorAddComponent } from './admin/components/trabajador-add/trabajador-add.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     LoginComponent,
     TrabajadoresComponent,
-    FormsModule
+    FormsModule,
+    TrabajadorListComponent,
+    TrabajadorAddComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
