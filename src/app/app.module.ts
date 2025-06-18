@@ -6,18 +6,19 @@ import { LoginComponent } from './login/login.component';
 import { TrabajadoresComponent } from './trabajadores/trabajadores.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AdminComponent } from './admin/admin.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    AdminComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     LoginComponent,
-    TrabajadoresComponent
+    TrabajadoresComponent,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

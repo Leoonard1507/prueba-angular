@@ -12,4 +12,11 @@ export class TrabajadorService {
     const data = localStorage.getItem(this.storageKey);
     return data ? JSON.parse(data) : [];
   }
+
+  // Función para añadir un trabajador
+  addTrabajador(trabajador: Trabajador): void {
+    const trabajadores = this.getTrabajadores();
+    trabajadores.push(trabajador);
+    localStorage.setItem(this.storageKey, JSON.stringify(trabajadores));
+  }
 }
