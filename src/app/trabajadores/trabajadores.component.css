@@ -1,20 +1,71 @@
+/* Contenedor del filtro */
+div {
+  margin-bottom: 1.5rem;
+}
+
+/* Radio buttons */
+label {
+  margin-right: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  margin-right: 0.3rem;
+}
+
+/* Input de búsqueda */
+input[placeholder="Buscar..."] {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.6rem 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Tarjetas de trabajadores */
 .trabajador-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid rgb(227, 225, 225);
-  border-radius: 20px;
-  width: 50%;
-  background-color: aliceblue;
-  margin: 10px;
-  padding: 10px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-img {
-  border-radius: 100px;
-  width: 9rem;
+.trabajador-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }
 
-.servicios {
-  color: grey;
+/* Foto del trabajador */
+.trabajador-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 2px solid #007bff;
+}
+
+/* Nombre */
+.trabajador-card h4 {
+  margin: 0.2rem 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+/* Servicios asignados */
+.trabajador-card .servicios {
+  font-style: italic;
+  color: #555;
+  font-size: 0.95rem;
 }
