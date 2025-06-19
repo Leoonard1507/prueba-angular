@@ -1,7 +1,9 @@
 <div class="navbar">
   <p class="title">LCars</p>
   <div class="buttons">
-    <button routerLink="/login">Iniciar sesión</button>
-    <button routerLink="/" (click)="cerrarSesion()">Cerrar sesión</button>
+    <!-- Solo muestra si NO hay usuario logueado -->
+    <button *ngIf="!usuario_logueado" routerLink="/login">Iniciar sesión</button>
+    <!-- Solo muestra si SÍ hay usuario logueado -->
+    <button *ngIf="usuario_logueado" (click)="cerrarSesion()">Cerrar sesión</button>
   </div>
 </div>
