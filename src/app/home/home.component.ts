@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   servicioSeleccionado: any = null;
   horaSeleccionada: string = '';
   fechaSeleccionada: Date | null = null;
-  servicios: any[] = []; 
+  servicios: any[] = [];
 
   constructor(private fb: FormBuilder) {
     // Definir el calendario y sus funcionalidades
@@ -133,16 +133,20 @@ export class HomeComponent implements OnInit {
     localStorage.setItem('citas', JSON.stringify(this.citas));
 
     // En el array que tiene los elementos visibles de la tabla agregar un nuevo elemento 
-    (this.calendarOptions.events as any[]).push({
-      title: `${nuevaCita.servicio} - ${nuevaCita.cliente_nombre}`,
-      start: nuevaCita.inicio,
-      end: nuevaCita.fin
-    });
+    this.calendarOptions.events = [
+      ...(this.calendarOptions.events as any[]),
+      {
+        title: `${nuevaCita.servicio} - ${nuevaCita.cliente_nombre}`,
+        start: nuevaCita.inicio,
+        end: nuevaCita.fin
+      }
+    ];
 
     // Se vuelve a cerrar el modal
     this.mostrarFormulario = false;
-    // Se limpia la fecha seleccionada y el formulario
+    // Se limpia la fecha seleccionada, el servicio y el formulario
     this.fechaSeleccionada = null;
+    this.servicioSeleccionado = null;
     this.citaForm.reset();
   }
 }
