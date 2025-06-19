@@ -1,0 +1,39 @@
+<div>
+  <label for="servicio">Selecciona un servicio:</label>
+  <select id="servicio" [(ngModel)]="servicioSeleccionado">
+    <option [ngValue]="null" disabled selected>-- Elige un servicio --</option>
+    <option *ngFor="let servicio of servicios" [ngValue]="servicio">
+      {{ servicio.nombre }} ({{ servicio.duracion }} min)
+    </option>
+  </select>
+</div>
+
+<full-calendar [options]="calendarOptions"></full-calendar>
+
+<div *ngIf="mostrarFormulario">
+  <h3>Datos del cliente</h3>
+  <form [formGroup]="citaForm" (ngSubmit)="guardarCita()">
+    <label>Hora:</label>
+    <input type="time" formControlName="hora" />
+
+    <input formControlName="cliente_nombre" placeholder="Nombre" />
+    <div *ngIf="citaForm.get('cliente_nombre')?.touched && citaForm.get('cliente_nombre')?.invalid" style="color:red;">
+      Nombre es obligatorio y mínimo 2 caracteres.
+    </div>
+
+    <input formControlName="cliente_telefono" placeholder="Teléfono" />
+    <div *ngIf="citaForm.get('cliente_telefono')?.touched && citaForm.get('cliente_telefono')?.invalid"
+      style="color:red;">
+      Teléfono obligatorio y debe tener 9 dígitos.
+    </div>
+
+    <input formControlName="cliente_email" placeholder="Email" />
+    <div *ngIf="citaForm.get('cliente_email')?.touched && citaForm.get('cliente_email')?.invalid" style="color:red;">
+      Email no es válido.
+    </div>
+
+    <textarea formControlName="notas_cliente" placeholder="Notas del cliente"></textarea>
+
+    <button type="submit" [disabled]="citaForm.invalid">Guardar cita</button>
+  </form>
+</div>

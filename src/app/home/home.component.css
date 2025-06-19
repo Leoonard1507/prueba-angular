@@ -1,0 +1,12 @@
+.formulario-cita {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  background: #f9f9f9;
+}
+input, textarea, select {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 5px;
+}
