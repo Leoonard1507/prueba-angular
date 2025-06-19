@@ -1,6 +1,6 @@
 <!-- Datos del usuario logueado -->
-<div *ngIf="trabajador">
-  <img [src]="trabajador.foto_url" alt="Foto del trabajador" width="150" />
+<div *ngIf="trabajador" class="trabajador-info">
+  <img [src]="trabajador.foto_url" alt="Foto del trabajador" />
   <p><strong>Nombre:</strong> {{ trabajador.nombre }}</p>
   <p><strong>Apellidos:</strong> {{ trabajador.apellidos }}</p>
   <p><strong>Correo:</strong> {{ trabajador.email }}</p>
@@ -22,16 +22,15 @@
 </div>
 
 <!-- Citas para el usuario -->
-<div *ngIf="citasFiltradas.length > 0;">
-  <div *ngFor="let cita of citasFiltradas">
-    <p><strong> Nombre cliente:</strong> {{ cita.cliente_nombre }}</p>
+<div *ngIf="citasFiltradas.length > 0" class="citas-container">
+  <div *ngFor="let cita of citasFiltradas" class="cita">
+    <p><strong>Nombre cliente:</strong> {{ cita.cliente_nombre }}</p>
     <p><strong>Email cliente:</strong> {{ cita.cliente_email }}</p>
-    <p><strong>Telefono cliente:</strong> {{ cita.cliente_telefono }}</p>
+    <p><strong>Teléfono cliente:</strong> {{ cita.cliente_telefono }}</p>
     <p><strong>Servicio:</strong> {{ cita.servicio }}</p>
     <p><strong>Fecha inicio:</strong> {{ cita.inicio }}</p>
     <p><strong>Fecha fin:</strong> {{ cita.fin }}</p>
     <p><strong>Estado:</strong> {{ cita.estado }}</p>
-    <p><strong>Notas cliente :</strong> {{ cita.notas_cliente }}</p>
+    <p><strong>Notas cliente:</strong> {{ cita.notas_cliente }}</p>
   </div>
 </div>
-
