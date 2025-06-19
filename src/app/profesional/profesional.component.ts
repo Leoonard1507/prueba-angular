@@ -44,7 +44,7 @@ export class TrabajadorComponent {
       const citas = JSON.parse(data);
       // Filtrar las citas que coincidan con alguno de los servicios asignados
       this.citasFiltradas = citas.filter((cita: any) => {
-        // Aquí asumo que servicios_asignados es un array, así que verificamos si incluye el servicio de la cita
+        // Verificar si los servicios del trabajador incluye el servicio de la cita
         return this.trabajador?.servicios_asignados.includes(cita.servicio);
       });
     }
