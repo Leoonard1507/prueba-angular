@@ -27,19 +27,9 @@ export class TrabajadorAddComponent {
     'sábado', 
     'domingo'
   ];
-  // Variable con un array que contiene los servicios que puede hacer un trabajador
-  serviciosDisponibles = [
-    'Cambio de aceite',
-    'Revisión de frenos',
-    'Alineación y balanceo',
-    'Reparación de motor',
-    'Mantenimiento general',
-    'Diagnóstico electrónico',
-    'Cambio de neumáticos',
-    'Reparación de transmisión',
-    'Servicio de suspensión',
-    'Revisión de aire acondicionado'
-  ];
+  // Variable para guardar los servicios disponibles
+  serviciosDisponibles: string[] = [];
+
   // Variable que contiene los roles de un trabajador
   rolesDisponibles = ['admin', 'profesional'];
 
@@ -66,6 +56,9 @@ export class TrabajadorAddComponent {
         }, {} as { [key: string]: any }) // Indicar el tipo de objeto creado
       )
     });
+
+    // Asignar el resultado devuelto por la funcion a serviciosDisponibles
+    this.serviciosDisponibles = this.getServiciosTrabajador();
   }
 
   // Función para mandar los mensajes de error recogidos en las validaciones, 
@@ -123,5 +116,15 @@ export class TrabajadorAddComponent {
     this.trabajadorAñadido.emit();
     // Limpiar los campos del formulario
     this.trabajadorForm.reset();
+  }
+
+  // Función para obtener los servicios que puede realizar un trabajador
+  getServiciosTrabajador(): string[] {
+    // Obtener los servicios disponibles 
+    const data = localStorage.getItem('serviciosDisponibles');
+    // Convertirlos a objetos
+    const serviciosDisponibles = data ? JSON.parse(data) : [];
+    // Devolver solo el nombre de los servicios
+    return serviciosDisponibles.map((servicio: any) => servicio.nombre);
   }
 }
