@@ -37,11 +37,12 @@ export class LoginComponent {
 
     // Si existe el usuario se le dirige a una ruta según su rol, sino se imprime un error
     if (usuario) {
+      localStorage.setItem('usuario_logueado', JSON.stringify(usuario));
       if (usuario.rol == "admin") {
         localStorage.setItem('usuario_logueado', JSON.stringify(usuario));
         this.router.navigate(['/admin']);
       } else {
-        this.error = 'No tienes permisos para acceder';
+        this.router.navigate(['/profesional']); 
       }
     } else {
       this.error = 'Correo o contraseña incorrectos';

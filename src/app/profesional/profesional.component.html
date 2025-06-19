@@ -1,5 +1,22 @@
-<div *ngfor="let t of trabajador">
-  <p><strong>Nombre:</strong> {{ t.nombre }}</p>
-  <p><strong>Apellido:</strong> {{ t.apellidos }}</p>
-  <p><strong>Correo:</strong> {{ t.email }}</p>
+<!-- Datos del usuario logueado -->
+<div *ngIf="trabajador">
+  <img [src]="trabajador.foto_url" alt="Foto del trabajador" width="150" />
+  <p><strong>Nombre:</strong> {{ trabajador.nombre }}</p>
+  <p><strong>Apellidos:</strong> {{ trabajador.apellidos }}</p>
+  <p><strong>Correo:</strong> {{ trabajador.email }}</p>
+  <p><strong>Teléfono:</strong> {{ trabajador.telefono }}</p>
+  <p><strong>Rol:</strong> {{ trabajador.rol }}</p>
+
+  <div *ngIf="trabajador.servicios_asignados?.length">
+    <p><strong>Servicios:</strong> {{ trabajador.servicios_asignados.join(', ') }}</p>
+  </div>
+
+  <div *ngIf="trabajador.horario">
+    <p><strong>Horario:</strong></p>
+    <ul>
+      <li *ngFor="let dia of getDias(trabajador.horario)">
+        {{ dia }}: {{ trabajador.horario[dia] }}
+      </li>
+    </ul>
+  </div>
 </div>

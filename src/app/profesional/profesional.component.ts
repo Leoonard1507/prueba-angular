@@ -7,11 +7,27 @@ import { Trabajador } from '../trabajadores/trabajadores.component';
   styleUrls: ['./profesional.component.css']
 })
 export class TrabajadorComponent {
-  trabajador: Trabajador[] | null = null;
+  // Crear un objeto de tipo trabajador para guardar el usuario logueado
+  trabajador: Trabajador | null = null;
 
-  datosProfesional(): any {
+  // Se ejecuta la función al cargar la página
+  ngOnInit(): void {
+    this.datosProfesional();
+  }
+
+  // Función para conseguir el usuario logueado
+  datosProfesional(): void {
+    // Se consiguen los elementos en forma de string
     const data = localStorage.getItem("usuario_logueado");
-    return data ? JSON.parse(data) : null;
+    // Si data existe
+    if (data) {
+      // Se pasa data a objeto
+      this.trabajador = JSON.parse(data);
+    }
+  }
+
+  // Devolver el nombre de las claves del horario
+  getDias(obj: any): string[] {
+    return Object.keys(obj);
   }
 }
-
