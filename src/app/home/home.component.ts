@@ -15,7 +15,7 @@ export interface Cita {
   notas_cliente: string;
   notas_profesional: string;
   servicio: string;
-  trabajadorId?: number;
+  trabajadorId?: string;
 }
 
 @Component({

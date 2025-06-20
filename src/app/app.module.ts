@@ -10,7 +10,8 @@ import { TrabajadorListComponent } from './admin/components/trabajador-list/trab
 import { TrabajadorAddComponent } from './admin/components/trabajador-add/trabajador-add.component';
 import { HomeComponent } from './home/home.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { TrabajadorComponent } from './profesional/profesional.component';  
+import { TrabajadorComponent } from './profesional/profesional.component';
+import { CrearCitaComponent } from './crear-cita/crear-cita.component';  
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { TrabajadorComponent } from './profesional/profesional.component';
     NavbarComponent,
     HomeComponent,
     TrabajadorComponent,
+    CrearCitaComponent,
   ],
   imports: [
     BrowserModule,

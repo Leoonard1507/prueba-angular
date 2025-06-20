@@ -35,3 +35,7 @@
     <button (click)="eliminarCita(cita)" class="btn btn-danger">Eliminar</button>
   </div>
 </div>
+
+<!-- Botón para crear citas -->
+<button (click)="mostrarFormulario = true">Nueva Cita</button>
+<app-crear-cita *ngIf="mostrarFormulario" (citaCreada)="onCitaCreada()" (cancelar)="mostrarFormulario = false"></app-crear-cita>

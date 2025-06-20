@@ -13,6 +13,8 @@ export class TrabajadorComponent {
   trabajador: Trabajador | null = null;
   // Crear un objeto para guardar las citas filtradas
   citasFiltradas: any[] = [];
+  // Crear un booleano que abra o cierre el formulario de crear cita
+  mostrarFormulario: boolean = false;
 
   constructor(private citaService: CitaService) { }
 
@@ -54,5 +56,11 @@ export class TrabajadorComponent {
     // Pasar el id de la cita que se va a eliminar
     this.citaService.eliminarCita(cita.id);
     this.citas(); 
+  }
+
+  // Al crear la cita cierra el formulario y actualiza las citas
+  onCitaCreada(): void {
+    this.mostrarFormulario = false;
+    this.citas();
   }
 }

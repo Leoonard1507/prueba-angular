@@ -1,0 +1,47 @@
+  <form [formGroup]="citaForm" (ngSubmit)="guardar()">
+
+    <input formControlName="cliente_nombre" placeholder="Nombre" />
+    <div *ngIf="citaForm.get('cliente_nombre')?.touched && citaForm.get('cliente_nombre')?.invalid" style="color:red;">
+      <div *ngIf="citaForm.get('cliente_nombre')?.errors?.['required']">El nombre es obligatorio.</div>
+      <div *ngIf="citaForm.get('cliente_nombre')?.errors?.['minlength']">Mínimo 2 caracteres.</div>
+    </div>
+
+    <input formControlName="cliente_telefono" placeholder="Teléfono" />
+    <div *ngIf="citaForm.get('cliente_telefono')?.touched && citaForm.get('cliente_telefono')?.invalid"
+      style="color:red;">
+      <div *ngIf="citaForm.get('cliente_telefono')?.errors?.['required']">Teléfono obligatorio.</div>
+      <div *ngIf="citaForm.get('cliente_telefono')?.errors?.['pattern']">Debe tener 9 dígitos.</div>
+    </div>
+
+    <input formControlName="cliente_email" placeholder="Email" />
+    <div *ngIf="citaForm.get('cliente_email')?.touched && citaForm.get('cliente_email')?.invalid" style="color:red;">
+      <div *ngIf="citaForm.get('cliente_email')?.errors?.['required']">Email obligatorio.</div>
+      <div *ngIf="citaForm.get('cliente_email')?.errors?.['email']">Email no es válido.</div>
+    </div>
+
+    <textarea formControlName="notas_profesional" placeholder="Notas del profesional"></textarea>
+
+    <select formControlName="servicio">
+      <option value="">Selecciona un servicio</option>
+      <option *ngFor="let s of servicios" [value]="s.nombre">
+        {{ s.nombre }} ({{ s.duracion }} min)
+      </option>
+    </select>
+    <div *ngIf="citaForm.get('servicio')?.touched && citaForm.get('servicio')?.invalid" style="color:red;">
+      Servicio obligatorio.
+    </div>
+
+    <input type="date" formControlName="fecha" />
+    <div *ngIf="citaForm.get('fecha')?.touched && citaForm.get('fecha')?.invalid" style="color:red;">
+      Fecha obligatoria.
+    </div>
+
+    <input type="time" formControlName="hora" />
+    <div *ngIf="citaForm.get('hora')?.touched && citaForm.get('hora')?.invalid" style="color:red;">
+      Hora obligatoria.
+    </div>
+
+    <button type="submit" [disabled]="citaForm.invalid">Guardar cita</button>
+    <button type="button" (click)="cancelar.emit()">Cancelar</button>
+
+  </form>
