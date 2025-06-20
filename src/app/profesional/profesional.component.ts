@@ -50,8 +50,9 @@ export class TrabajadorComponent {
   }
 
   // Función para eliminar una cita
-    eliminarCita(cita: Cita) {
-      this.citaService.eliminarCita(cita.id);
-      this.citaService.getCitas();
+  eliminarCita(cita: Cita) {
+    // Pasar el id de la cita que se va a eliminar
+    this.citaService.eliminarCita(cita.id);
+    this.citas(); 
   }
 }

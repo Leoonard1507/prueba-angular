@@ -60,13 +60,6 @@ export class TrabajadorAddComponent {
 
     // Asignar el resultado devuelto por la funcion a serviciosDisponibles
     this.serviciosDisponibles = this.getServiciosTrabajador();
-
-    // Conseguir la lista de trabajadores 
-    const trabajadoresExistentes: Trabajador[] = JSON.parse(localStorage.getItem('trabajadores') || '[]');
-    // Conseguir el id más alto ya existente
-    const maxId = trabajadoresExistentes.reduce((max, t) => Math.max(max, t.id), 0);
-    // A id se le da el valor de maxId mas uno
-    this.id = maxId + 1;
   }
 
   // Función para mandar los mensajes de error recogidos en las validaciones, 
@@ -107,7 +100,7 @@ export class TrabajadorAddComponent {
 
     // Crear el nuevo objeto con todos los parámetros del nuevo trabajador
     const nuevoTrabajador: Trabajador = {
-      id: this.id++,
+      id: crypto.randomUUID(),
       nombre: formValues.nombre,
       apellidos: formValues.apellidos,
       email: formValues.email,

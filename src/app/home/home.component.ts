@@ -5,7 +5,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export interface Cita {
-  id: number;
+  id: string;
   cliente_email: string;
   cliente_nombre: string;
   cliente_telefono: string;
@@ -36,9 +36,6 @@ export class HomeComponent implements OnInit {
   horaSeleccionada: string = '';
   fechaSeleccionada: Date | null = null;
   servicios: any[] = [];
-  // Buscamos el mayor valor del id de la lista cita 
-  maxId = this.citas.reduce((max, cita) => Math.max(max, cita.id), 0);
-
   constructor(private fb: FormBuilder) {
     // Definir el calendario y sus funcionalidades
     this.calendarOptions = {
@@ -133,7 +130,7 @@ export class HomeComponent implements OnInit {
 
     // Se crea la nueva cita con todos sus parámetros
     const nuevaCita = {
-      id: this.maxId++,
+      id: crypto.randomUUID(),
       cliente_nombre: formValues.cliente_nombre,
       cliente_telefono: formValues.cliente_telefono,
       cliente_email: formValues.cliente_email,

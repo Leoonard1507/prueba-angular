@@ -16,7 +16,7 @@ export class CitaService {
   }
 
   // Función para eliminar citas
-  eliminarCita(id: number){
+  eliminarCita(id: string){
     // Se crea otro array en el que no va a estar el id pasado de la cita que se va a borrar
     const citas = this.getCitas().filter(c => c.id !== id);
     // Se pasa a string y se sube al localSotrage

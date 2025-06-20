@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 // Crear una interfaz con los parámetros de los trabajadores
 export interface Trabajador {
-  id: number;
+  id: string;
   nombre: string;
   apellidos: string;
   email: string;
