@@ -29,7 +29,8 @@ export class TrabajadorAddComponent {
   ];
   // Variable para guardar los servicios disponibles
   serviciosDisponibles: string[] = [];
-
+  // Crear una variable id que al crear un trabajador le suma uno
+  id = 0;
   // Variable que contiene los roles de un trabajador
   rolesDisponibles = ['admin', 'profesional'];
 
@@ -99,6 +100,7 @@ export class TrabajadorAddComponent {
 
     // Crear el nuevo objeto con todos los parámetros del nuevo trabajador
     const nuevoTrabajador: Trabajador = {
+      id: this.id++,
       nombre: formValues.nombre,
       apellidos: formValues.apellidos,
       email: formValues.email,
