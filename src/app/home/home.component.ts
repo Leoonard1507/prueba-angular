@@ -4,6 +4,19 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+export interface Cita {
+  id: number;
+  cliente_email: string;
+  cliente_nombre: string;
+  cliente_telefono: string;
+  estado: string;
+  inicio: string;
+  fin: string;
+  notas_cliente: string;
+  notas_profesional: string;
+  servicio: string;
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,13 +28,15 @@ export class HomeComponent implements OnInit {
   // Variables
   calendarOptions: CalendarOptions;
   citaForm: FormGroup;
-  citas: any[] = [];
+  citas: Cita[] = [];
   mostrarFormulario = false;
   citaTemporal: any = {};
   servicioSeleccionado: any = null;
   horaSeleccionada: string = '';
   fechaSeleccionada: Date | null = null;
   servicios: any[] = [];
+  // Buscamos el mayor valor del id de la lista cita 
+  maxId = this.citas.reduce((max, cita) => Math.max(max, cita.id), 0);
 
   constructor(private fb: FormBuilder) {
     // Definir el calendario y sus funcionalidades
@@ -117,10 +132,12 @@ export class HomeComponent implements OnInit {
 
     // Se crea la nueva cita con todos sus parámetros
     const nuevaCita = {
+      id: this.maxId++,
       cliente_nombre: formValues.cliente_nombre,
       cliente_telefono: formValues.cliente_telefono,
       cliente_email: formValues.cliente_email,
       notas_cliente: formValues.notas_cliente,
+      notas_profesional: " ",
       estado: 'pendiente',
       servicio: this.servicioSeleccionado.nombre,
       inicio: inicio.toISOString(),
