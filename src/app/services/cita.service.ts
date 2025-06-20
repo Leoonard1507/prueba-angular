@@ -10,8 +10,16 @@ export class CitaService {
 
   constructor() { }
 
-  //Función para obtener todas las citas 
-    getCitas(): Cita[] {
+  // Función para obtener todas las citas 
+  getCitas(): Cita[] {
     return JSON.parse(localStorage.getItem(this.localStorageKey) || '[]');
+  }
+
+  // Función para eliminar citas
+  eliminarCita(id: number){
+    // Se crea otro array en el que no va a estar el id pasado de la cita que se va a borrar
+    const citas = this.getCitas().filter(c => c.id !== id);
+    // Se pasa a string y se sube al localSotrage
+    localStorage.setItem(this.localStorageKey, JSON.stringify(citas));
   }
 }

@@ -48,4 +48,10 @@ export class TrabajadorComponent {
       this.trabajador?.servicios_asignados.includes(cita.servicio)
     );
   }
+
+  // Función para eliminar una cita
+    eliminarCita(cita: Cita) {
+      this.citaService.eliminarCita(cita.id);
+      this.citaService.getCitas();
+  }
 }
