@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Trabajador } from '../trabajadores/trabajadores.component';
+import { CitaService } from '../services/cita.service';
+import { Cita } from '../home/home.component';
 
 @Component({
   selector: 'app-trabajador',
@@ -11,6 +13,8 @@ export class TrabajadorComponent {
   trabajador: Trabajador | null = null;
   // Crear un objeto para guardar las citas filtradas
   citasFiltradas: any[] = [];
+
+  constructor(private citaService: CitaService) { }
 
   // Se ejecuta la función al cargar la página
   ngOnInit(): void {
@@ -36,17 +40,12 @@ export class TrabajadorComponent {
 
   // Función para obtener las citas 
   citas(): void {
-    // Se consiguen los elementos en forma de string
-    const data = localStorage.getItem("citas");
-    // Si data existe
-    if (data) {
-      // Se pasa data a objeto
-      const citas = JSON.parse(data);
-      // Filtrar las citas que coincidan con alguno de los servicios asignados
-      this.citasFiltradas = citas.filter((cita: any) => {
-        // Verificar si los servicios del trabajador incluye el servicio de la cita
-        return this.trabajador?.servicios_asignados.includes(cita.servicio);
-      });
-    }
+    // Conseguir el array de citas desde cita.sevices
+    const citas = this.citaService.getCitas();
+
+    // Filtrar las citas y en las que coincida el servicio con los que presta el mecánico que las muestre
+    this.citasFiltradas = citas.filter((cita: Cita) =>
+      this.trabajador?.servicios_asignados.includes(cita.servicio)
+    );
   }
 }
