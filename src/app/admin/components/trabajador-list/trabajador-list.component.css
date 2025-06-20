@@ -1,0 +1,77 @@
+h2 {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 2rem;
+  color: #333;
+}
+
+.trabajador-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1rem auto;
+  max-width: 700px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.trabajador-card:hover {
+  transform: scale(1.01);
+}
+
+.trabajador-card img {
+  float: left;
+  margin-right: 1.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  width: 100px;
+  height: 100px;
+  border: 2px solid #007bff;
+}
+
+.trabajador-card h3 {
+  margin-top: 0;
+  color: #007bff;
+}
+
+.trabajador-card p {
+  margin: 0.25rem 0;
+  color: #444;
+}
+
+.trabajador-card ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.5rem;
+}
+
+.trabajador-card li {
+  color: #555;
+}
+
+.trabajador-card button {
+  margin-top: 1rem;
+  background-color: #dc3545;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.trabajador-card button:hover {
+  background-color: #c82333;
+}
+
+@media (max-width: 600px) {
+  .trabajador-card {
+    padding: 1rem;
+  }
+
+  .trabajador-card img {
+    display: block;
+    margin: 0 auto 1rem;
+  }
+}
