@@ -1,4 +1,5 @@
 <h2>Lista de Profesionales</h2>
+
 <div *ngFor="let trabajador of trabajadores; let i = index" class="trabajador-card">
   <img [src]="trabajador.foto_url" alt="Foto de {{ trabajador.nombre }}" width="100" />
   <h3>{{ trabajador.nombre }} {{ trabajador.apellidos }}</h3>
@@ -12,5 +13,38 @@
       {{ dia }}: {{ trabajador.horario[dia] || 'No asignado' }}
     </li>
   </ul>
+
+  <button (click)="editarTrabajador(trabajador)">Editar</button>
   <button (click)="eliminarTrabajador(i)">Eliminar</button>
+
+  <!-- Formulario de edición -->
+  <div *ngIf="mostrarFormulario && trabajadorParaEditar">
+    <h4>Editar Trabajador</h4>
+
+    <input [(ngModel)]="trabajadorParaEditar.nombre" placeholder="Nombre" />
+    <input [(ngModel)]="trabajadorParaEditar.apellidos" placeholder="Apellidos" />
+    <input [(ngModel)]="trabajadorParaEditar.email" placeholder="Email" />
+    <input [(ngModel)]="trabajadorParaEditar.telefono" placeholder="Teléfono" />
+    <input [(ngModel)]="trabajadorParaEditar.foto_url" placeholder="Foto URL" />
+    <input [(ngModel)]="trabajadorParaEditar.rol" placeholder="Rol" />
+    <input [(ngModel)]="trabajadorParaEditar.password" placeholder="Contraseña" type="password" />
+    <label>Servicios asignados:</label>
+    <select multiple [(ngModel)]="trabajadorParaEditar.servicios_asignados">
+      <option *ngFor="let servicio of servicios" [value]="servicio">
+        {{ servicio }}
+      </option>
+    </select>
+    <label>Horario:</label>
+    <div *ngFor="let dia of diasSemana">
+      <label>{{ dia }}:</label>
+      <input
+        type="text"
+        [(ngModel)]="trabajadorParaEditar.horario[dia]"
+        placeholder="Horario para {{ dia }}"
+      />
+    </div>
+
+    <button (click)="guardarCambios()">Guardar</button>
+    <button (click)="cancelarEdicion()">Cancelar</button>
+  </div>
 </div>

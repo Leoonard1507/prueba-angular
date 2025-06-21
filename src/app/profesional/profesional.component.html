@@ -24,6 +24,7 @@
 <!-- Citas para el usuario -->
 <div *ngIf="citasFiltradas.length > 0" class="citas-container">
   <div *ngFor="let cita of citasFiltradas" class="cita">
+    <button (click)="asignarmeCita(cita)">+</button>
     <p><strong>Nombre cliente:</strong> {{ cita.cliente_nombre }}</p>
     <p><strong>Email cliente:</strong> {{ cita.cliente_email }}</p>
     <p><strong>Teléfono cliente:</strong> {{ cita.cliente_telefono }}</p>

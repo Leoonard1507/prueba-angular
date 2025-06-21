@@ -26,4 +26,15 @@ export class TrabajadorService {
     trabajadores.splice(index, 1);
     localStorage.setItem(this.storageKey, JSON.stringify(trabajadores));
   }
+
+  // Función para actualizar un trabajador
+  updateTrabajador(updatedTrabajador: Trabajador): void {
+    const trabajadores = this.getTrabajadores();
+    const index = trabajadores.findIndex(t => t.id === updatedTrabajador.id);
+    if (index !== -1) {
+      trabajadores[index] = updatedTrabajador;
+      localStorage.setItem(this.storageKey, JSON.stringify(trabajadores));
+    }
+  }
+
 }

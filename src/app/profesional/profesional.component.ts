@@ -74,4 +74,22 @@ export class TrabajadorComponent {
     this.citaParaEditar = null; 
     this.citas();
   }
+
+  // Función para asignar una cita al trabajador
+  asignarmeCita(cita: Cita): void {
+  if (!this.trabajador) return;
+
+  // A citaEditada se le pasa el objeto cita y se le añade el id del trabajador
+  const citaEditada = {
+    ...cita,
+    trabajadorId: this.trabajador.id
+  };
+  console.log('Cita asignada:', citaEditada);
+
+  // Se llama al servicio para actualizar la cita
+  this.citaService.actualizarCita(citaEditada);
+  // Refresca la lista
+  this.citas(); 
+}
+
 }
