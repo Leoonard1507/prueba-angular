@@ -15,6 +15,8 @@ export class TrabajadorComponent {
   citasFiltradas: any[] = [];
   // Crear un booleano que abra o cierre el formulario de crear cita
   mostrarFormulario: boolean = false;
+  // Crear una variable para editar la cita
+  citaParaEditar: Cita | null = null;
 
   constructor(private citaService: CitaService) { }
 
@@ -51,16 +53,25 @@ export class TrabajadorComponent {
     );
   }
 
+  // Función para crear una nueva cita
+  editarCita(cita: Cita): void {
+    // Asignar la cita a editar y mostrar el formulario
+    this.citaParaEditar = cita;
+    // Mostrar el formulario para editar la cita
+    this.mostrarFormulario = true;
+  }
+
   // Función para eliminar una cita
   eliminarCita(cita: Cita) {
     // Pasar el id de la cita que se va a eliminar
     this.citaService.eliminarCita(cita.id);
-    this.citas(); 
+    this.citas();
   }
 
   // Al crear la cita cierra el formulario y actualiza las citas
   onCitaCreada(): void {
     this.mostrarFormulario = false;
+    this.citaParaEditar = null; 
     this.citas();
   }
 }

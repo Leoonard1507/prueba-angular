@@ -11,7 +11,7 @@ import { TrabajadorAddComponent } from './admin/components/trabajador-add/trabaj
 import { HomeComponent } from './home/home.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { TrabajadorComponent } from './profesional/profesional.component';
-import { CrearCitaComponent } from './crear-cita/crear-cita.component';  
+import { CrearCitaComponent } from './crear-editar-cita/crear-editar-cita.component';  
 
 @NgModule({
   declarations: [
