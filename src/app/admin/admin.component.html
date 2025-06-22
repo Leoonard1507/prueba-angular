@@ -1,2 +1,2 @@
-<app-trabajador-add (trabajadorAñadido)="actualizarLista()"></app-trabajador-add>
-<app-trabajador-list [trabajadores]="trabajadores"></app-trabajador-list>
+<app-trabajador-add-edit [trabajadorParaEditar]="trabajadorSeleccionado" (trabajadorGuardado)="actualizarLista()" (edicionCancelada)="cancelarEdicion()"/>
+<app-trabajador-list [trabajadores]="trabajadores" (editar)="editarTrabajador($event)"></app-trabajador-list>

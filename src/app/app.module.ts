@@ -7,7 +7,7 @@ import { TrabajadoresComponent } from './trabajadores/trabajadores.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TrabajadorListComponent } from './admin/components/trabajador-list/trabajador-list.component';
-import { TrabajadorAddComponent } from './admin/components/trabajador-add/trabajador-add.component';
+import { TrabajadorAddEditComponent } from './admin/components/trabajador-add-edit/trabajador-add-edit.component';
 import { HomeComponent } from './home/home.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { TrabajadorComponent } from './profesional/profesional.component';
@@ -28,7 +28,7 @@ import { CrearCitaComponent } from './crear-editar-cita/crear-editar-cita.compon
     TrabajadoresComponent,
     FormsModule,
     TrabajadorListComponent,
-    TrabajadorAddComponent,
+    TrabajadorAddEditComponent,
     FullCalendarModule, 
     ReactiveFormsModule, 
   ],

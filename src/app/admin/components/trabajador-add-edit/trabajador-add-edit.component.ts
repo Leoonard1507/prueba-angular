@@ -1,36 +1,39 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { TrabajadorService } from 'src/app/services/trabajador.service';
-import { Trabajador } from 'src/app/trabajadores/trabajadores.component';
+import type { Trabajador } from 'src/app/trabajadores/trabajadores.component';
 import { EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-trabajador-add',
-  templateUrl: './trabajador-add.component.html',
-  styleUrls: ['./trabajador-add.component.css'],
+  selector: 'app-trabajador-add-edit',
+  templateUrl: './trabajador-add-edit.component.html',
+  styleUrls: ['./trabajador-add-edit.component.css'],
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule]
 })
-export class TrabajadorAddComponent {
+
+export class TrabajadorAddEditComponent {
   // Avisar al componente padre de que ha surgido un evento
-  @Output() trabajadorAñadido = new EventEmitter<void>();
+  @Output() trabajadorGuardado = new EventEmitter<void>();
+  // Recibir un trabajador para editar, si no se recibe, será null
+  @Input() trabajadorParaEditar?: Trabajador | null;
+  // Avisar al componente padre de que se ha cancelado la edición
+  @Output() edicionCancelada = new EventEmitter<void>();
   // Crear un elemento de tipo FormGroup
   trabajadorForm: FormGroup;
   // Un array con los días de la semana para posteriormente usarlo al añadir el horario del nuevo usuario
   diasSemana: string[] = [
-    'lunes', 
-    'martes', 
-    'miércoles', 
-    'jueves', 
-    'viernes', 
-    'sábado', 
+    'lunes',
+    'martes',
+    'miércoles',
+    'jueves',
+    'viernes',
+    'sábado',
     'domingo'
   ];
   // Variable para guardar los servicios disponibles
   serviciosDisponibles: string[] = [];
-  // Crear una variable id que al crear un trabajador le suma uno
-  id = 0;
   // Variable que contiene los roles de un trabajador
   rolesDisponibles = ['admin', 'profesional'];
 
@@ -51,7 +54,7 @@ export class TrabajadorAddComponent {
         // Se crea un objeto con una clave por cada día
         this.diasSemana.reduce((acc, dia) => {
           // Se crea una entrada en el objeto para cada día inicialmente vacía
-          acc[dia] = ['']; 
+          acc[dia] = [''];
           // Se devuelve el objeto
           return acc;
         }, {} as { [key: string]: any }) // Indicar el tipo de objeto creado
@@ -60,6 +63,24 @@ export class TrabajadorAddComponent {
 
     // Asignar el resultado devuelto por la funcion a serviciosDisponibles
     this.serviciosDisponibles = this.getServiciosTrabajador();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.trabajadorParaEditar) {
+      this.trabajadorForm.patchValue({
+        nombre: this.trabajadorParaEditar.nombre,
+        apellidos: this.trabajadorParaEditar.apellidos,
+        email: this.trabajadorParaEditar.email,
+        telefono: this.trabajadorParaEditar.telefono,
+        foto_url: this.trabajadorParaEditar.foto_url,
+        servicios: this.trabajadorParaEditar.servicios_asignados,
+        rol: this.trabajadorParaEditar.rol,
+        password: '',
+        horario: this.trabajadorParaEditar.horario || {}
+      });
+    } else if (changes['trabajadorParaEditar'] && !this.trabajadorParaEditar) {
+      this.trabajadorForm.reset();
+    }
   }
 
   // Función para mandar los mensajes de error recogidos en las validaciones, 
@@ -87,38 +108,58 @@ export class TrabajadorAddComponent {
   }
 
   // Función para agregar el trabajador
-  agregarTrabajador() {
-    // Comprueba si el formulario tiene un formato inválido
+  guardarTrabajador() {
     if (this.trabajadorForm.invalid) {
-      // Inicar el error con solo ser tocado y no ser rellenado
       this.trabajadorForm.markAllAsTouched();
       return;
     }
 
-    // Guardar los valores del objeto creado de trabajadoresForm
     const formValues = this.trabajadorForm.value;
 
-    // Crear el nuevo objeto con todos los parámetros del nuevo trabajador
-    const nuevoTrabajador: Trabajador = {
-      id: crypto.randomUUID(),
-      nombre: formValues.nombre,
-      apellidos: formValues.apellidos,
-      email: formValues.email,
-      telefono: formValues.telefono,
-      foto_url: formValues.foto_url,
-      servicios_asignados: formValues.servicios,
-      horario: formValues.horario,
-      rol: formValues.rol,
-      password: formValues.password,
-    };
+    if (this.trabajadorParaEditar) {
+      // Editar
+      const updatedTrabajador: Trabajador = {
+        ...this.trabajadorParaEditar,
+        nombre: formValues.nombre,
+        apellidos: formValues.apellidos,
+        email: formValues.email,
+        telefono: formValues.telefono,
+        foto_url: formValues.foto_url,
+        servicios_asignados: formValues.servicios,
+        rol: formValues.rol,
+        password: formValues.password || this.trabajadorParaEditar.password,
+        horario: formValues.horario,
+      };
+      this.trabajadorService.updateTrabajador(updatedTrabajador);
+    } else {
+      // Crear
+      const nuevoTrabajador: Trabajador = {
+        id: crypto.randomUUID(),
+        nombre: formValues.nombre,
+        apellidos: formValues.apellidos,
+        email: formValues.email,
+        telefono: formValues.telefono,
+        foto_url: formValues.foto_url,
+        servicios_asignados: formValues.servicios,
+        rol: formValues.rol,
+        password: formValues.password,
+        horario: formValues.horario,
+      };
+      this.trabajadorService.addTrabajador(nuevoTrabajador);
+    }
 
-    // Llamar a la función para añadir trabajadores y pasarle el nuevo trabajador
-    this.trabajadorService.addTrabajador(nuevoTrabajador);
-    // Emitir un evento para avisar de que se ha añadido un nuevo trabajador
-    this.trabajadorAñadido.emit();
-    // Limpiar los campos del formulario
+    this.trabajadorGuardado.emit();
     this.trabajadorForm.reset();
+    this.trabajadorParaEditar = null;
   }
+
+  // Función para cancelar la edición
+  cancelarEdicion() {
+    this.trabajadorForm.reset();
+    this.trabajadorParaEditar = null; // localmente, aunque el padre también debe limpiar
+    this.edicionCancelada.emit(); // avisar al padre
+  }
+
 
   // Función para obtener los servicios que puede realizar un trabajador
   getServiciosTrabajador(): string[] {
