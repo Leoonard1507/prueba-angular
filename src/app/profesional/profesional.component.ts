@@ -75,25 +75,31 @@ export class TrabajadorComponent {
   // Al crear la cita cierra el formulario y actualiza las citas
   onCitaCreada(): void {
     this.mostrarFormulario = false;
-    this.citaParaEditar = null; 
+    this.citaParaEditar = null;
     this.citas();
   }
 
   // Función para asignar una cita al trabajador
   asignarmeCita(cita: Cita): void {
-  if (!this.trabajador) return;
+    if (!this.trabajador) return;
 
-  // A citaEditada se le pasa el objeto cita y se le añade el id del trabajador
-  const citaEditada = {
-    ...cita,
-    trabajadorId: this.trabajador.id
-  };
-  console.log('Cita asignada:', citaEditada);
+    // A citaEditada se le pasa el objeto cita y se le añade el id del trabajador
+    const citaEditada = {
+      ...cita,
+      trabajadorId: this.trabajador.id
+    };
+    console.log('Cita asignada:', citaEditada);
 
-  // Se llama al servicio para actualizar la cita
-  this.citaService.actualizarCita(citaEditada);
-  // Refresca la lista
-  this.citas(); 
-}
+    // Se llama al servicio para actualizar la cita
+    this.citaService.actualizarCita(citaEditada);
+    // Refresca la lista
+    this.citas();
+  }
 
+  // Función para cambiar el estado de una cita
+  cambiarEstadoCita(cita: any, nuevoEstado: string) {
+    const citaActualizada = { ...cita, estado: nuevoEstado };
+    this.citaService.actualizarCita(citaActualizada);
+    this.citas();
+  }
 }

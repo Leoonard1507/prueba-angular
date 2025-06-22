@@ -47,11 +47,31 @@ export class AdminComponent {
   }
 
   eliminarCita(cita: any) {
-      this.citaService.eliminarCita(cita.id); // ✅ pásale solo el ID
-      this.actualizarLista(); // ✅ refresca la lista
+    this.citaService.eliminarCita(cita.id);
+    this.actualizarLista();
   }
 
   editarCita(cita: any) {
     this.citaSeleccionada = cita;
+  }
+
+  cambiarEstadoCita(cita: any, nuevoEstado: string) {
+    const citaActualizada = { ...cita, estado: nuevoEstado };
+    this.citaService.actualizarCita(citaActualizada);
+    this.actualizarLista();
+  }
+
+  asignarTrabajador(cita: any, trabajadorId: string | null) {
+    const citaActualizada = { ...cita, trabajadorId };
+    this.citaService.actualizarCita(citaActualizada);
+    this.actualizarLista();
+  }
+
+  getTrabajadorNombre(trabajadorId: string | null | undefined): string {
+    if (!trabajadorId) {
+      return 'No asignado';
+    }
+    const trabajador = this.trabajadores.find(t => t.id === trabajadorId);
+    return trabajador ? trabajador.nombre : 'No asignado';
   }
 }

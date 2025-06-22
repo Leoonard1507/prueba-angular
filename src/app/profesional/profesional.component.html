@@ -34,6 +34,13 @@
     <p><strong>Estado:</strong> {{ cita.estado }}</p>
     <p><strong>Notas cliente:</strong> {{ cita.notas_cliente }}</p>
     <p><strong>Notas profesional:</strong> {{ cita.notas_profesional }}</p>
+
+    <div>
+      <button (click)="cambiarEstadoCita(cita, 'pendiente')">🕒 Pendiente</button>
+      <button (click)="cambiarEstadoCita(cita, 'arreglando')">🛠️ Arreglando</button>
+      <button (click)="cambiarEstadoCita(cita, 'listo')">✅ Listo</button>
+    </div>
+
     <button (click)="editarCita(cita)">Editar</button>
     <button (click)="eliminarCita(cita)" class="btn btn-danger">Eliminar</button>
   </div>
@@ -41,9 +48,6 @@
 
 <!-- Botón para crear citas -->
 <button (click)="mostrarFormulario = true">Nueva Cita</button>
-<app-crear-editar-cita
-  *ngIf="mostrarFormulario"
-  [citaParaEditar]="citaParaEditar"
-  (citaCreada)="onCitaCreada()"
+<app-crear-editar-cita *ngIf="mostrarFormulario" [citaParaEditar]="citaParaEditar" (citaCreada)="onCitaCreada()"
   (cancelar)="mostrarFormulario = false">
 </app-crear-editar-cita>
