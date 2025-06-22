@@ -8,8 +8,8 @@ import { Trabajador } from 'src/app/trabajadores/trabajadores.component';
   selector: 'app-trabajador-list',
   templateUrl: './trabajador-list.component.html',
   styleUrls: ['./trabajador-list.component.css'],
+  imports: [FormsModule, CommonModule],
   standalone: true,
-  imports: [FormsModule, CommonModule]
 })
 
 export class TrabajadorListComponent {

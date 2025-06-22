@@ -1,11 +1,14 @@
 import { Component, EventEmitter, Output, OnInit, Input, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CitaService } from '../services/cita.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-crear-editar-cita',
   templateUrl: './crear-editar-cita.component.html',
-  styleUrls: ['./crear-editar-cita.component.css']
+  styleUrls: ['./crear-editar-cita.component.css'],
+  standalone: true, 
+  imports: [ReactiveFormsModule, FormsModule, CommonModule],
 })
 export class CrearCitaComponent implements OnInit {
   // Mandar una notificacion de que ha surgido un evento

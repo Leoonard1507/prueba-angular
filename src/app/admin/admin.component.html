@@ -1,2 +1,30 @@
 <app-trabajador-add-edit [trabajadorParaEditar]="trabajadorSeleccionado" (trabajadorGuardado)="actualizarLista()" (edicionCancelada)="cancelarEdicion()"/>
 <app-trabajador-list [trabajadores]="trabajadores" (editar)="editarTrabajador($event)"></app-trabajador-list>
+
+
+<h2>Crear o editar cita</h2>
+<app-crear-editar-cita
+  [citaParaEditar]="citaSeleccionada"
+  (citaCreada)="actualizarLista(); cancelarEdicionCita()"
+  (cancelar)="cancelarEdicionCita()"
+/>
+
+<h2>📅 Citas Registradas</h2>
+
+<div *ngIf="citas.length > 0">
+  <div *ngFor="let cita of citas" class="cita-card">
+    <p><strong>Cliente:</strong> {{ cita.cliente_nombre }}</p>
+    <p><strong>Teléfono:</strong> {{ cita.cliente_telefono }}</p>
+    <p><strong>Email:</strong> {{ cita.cliente_email }}</p>
+    <p><strong>Servicio:</strong> {{ cita.servicio }}</p>
+    <p><strong>Estado:</strong> {{ cita.estado }}</p>
+    <p><strong>Inicio:</strong> {{ cita.inicio | date: 'dd/MM/yyyy HH:mm' }}</p>
+    <p><strong>Fin:</strong> {{ cita.fin | date: 'dd/MM/yyyy HH:mm' }}</p>
+    <p><strong>Notas cliente:</strong> {{ cita.notas_cliente }}</p>
+    <p><strong>Notas profesional:</strong> {{ cita.notas_profesional }}</p>
+    <p><strong>Trabajador ID:</strong> {{ cita.trabajadorId || 'No asignado' }}</p>
+  
+    <button (click)="editarCita(cita)">✏️ Editar</button>
+    <button (click)="eliminarCita(cita)">🗑️ Eliminar</button>
+  </div>
+</div>

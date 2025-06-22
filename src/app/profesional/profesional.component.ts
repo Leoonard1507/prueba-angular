@@ -2,11 +2,15 @@ import { Component } from '@angular/core';
 import { Trabajador } from '../trabajadores/trabajadores.component';
 import { CitaService } from '../services/cita.service';
 import { Cita } from '../home/home.component';
+import { CommonModule } from '@angular/common';
+import { CrearCitaComponent } from '../crear-editar-cita/crear-editar-cita.component';
 
 @Component({
   selector: 'app-trabajador',
   templateUrl: './profesional.component.html',
-  styleUrls: ['./profesional.component.css']
+  styleUrls: ['./profesional.component.css'],
+  standalone: true,
+  imports: [CommonModule, CrearCitaComponent]
 })
 export class TrabajadorComponent {
   // Crear un objeto de tipo trabajador para guardar el usuario logueado

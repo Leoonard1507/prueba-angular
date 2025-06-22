@@ -18,8 +18,6 @@ import { CrearCitaComponent } from './crear-editar-cita/crear-editar-cita.compon
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    TrabajadorComponent,
-    CrearCitaComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +29,7 @@ import { CrearCitaComponent } from './crear-editar-cita/crear-editar-cita.compon
     TrabajadorAddEditComponent,
     FullCalendarModule, 
     ReactiveFormsModule, 
+    TrabajadorComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
