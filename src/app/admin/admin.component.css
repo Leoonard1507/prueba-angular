@@ -1,0 +1,118 @@
+h2 {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 2rem;
+  color: #333;
+}
+
+.cita-card p {
+  margin: 0.25rem 0;
+  color: #444;
+}
+
+.select-trabajador {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 1rem;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+  min-width: 200px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.select-trabajador:hover {
+  border-color: #007bff;
+}
+
+.select-trabajador:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+.admin-container {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.profesionales-container {
+  flex: 1;
+  min-width: 300px;
+}
+
+.cita-container {
+  flex: 1;
+}
+
+.cita-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.cita-card:hover {
+  transform: scale(1.01);
+}
+
+.estado-botones,
+.acciones {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.estado-botones button:nth-child(1) { background-color: #ffc107; }
+.estado-botones button:nth-child(2) { background-color: #17a2b8; color: white; }
+.estado-botones button:nth-child(3) { background-color: #28a745; color: white; }
+
+.acciones button:nth-child(1) { background-color: #007bff; color: white; }
+.acciones button:nth-child(2) { background-color: #dc3545; color: white; }
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+  .admin-container {
+    flex-direction: column;
+  }
+
+  .profesionales-container,
+  .cita-container {
+    width: 100%;
+  }
+
+  .cita-card {
+    margin-bottom: 1.5rem;
+  }
+
+  .estado-botones,
+  .acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .select-trabajador {
+    width: 100%;
+  }
+}

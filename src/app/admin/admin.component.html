@@ -6,12 +6,11 @@
   </div>
 
 
-  <div class="cita-contsiner">
-    <h2>Crear o editar cita</h2>
+  <div class="cita-container">
     <app-crear-editar-cita [citaParaEditar]="citaSeleccionada" (citaCreada)="actualizarLista(); cancelarEdicionCita()"
       (cancelar)="cancelarEdicionCita()" />
 
-    <h2>📅 Citas Registradas</h2>
+    <h2>Citas Registradas</h2>
 
     <div *ngIf="citas.length > 0">
       <div *ngFor="let cita of citas" class="cita-card">
@@ -25,20 +24,24 @@
         <p><strong>Notas cliente:</strong> {{ cita.notas_cliente }}</p>
         <p><strong>Notas profesional:</strong> {{ cita.notas_profesional }}</p>
         <p><strong>Trabajador:</strong> {{ getTrabajadorNombre(cita.trabajadorId) }}</p>
-        <label>Asignar trabajador:</label>
-        <select [ngModel]="cita.trabajadorId" (ngModelChange)="asignarTrabajador(cita, $event)">
+        <p><strong>Asignar trabajador:</strong></p>
+        <select id="trabajador-select" class="select-trabajador" [ngModel]="cita.trabajadorId"
+          (ngModelChange)="asignarTrabajador(cita, $event)">
           <option [ngValue]="null">-- Ninguno --</option>
           <option *ngFor="let t of trabajadores" [ngValue]="t.id">{{ t.nombre }}</option>
         </select>
 
-        <div>
+
+        <div class="estado-botones">
           <button (click)="cambiarEstadoCita(cita, 'pendiente')">🕒 Pendiente</button>
           <button (click)="cambiarEstadoCita(cita, 'arreglando')">🛠️ Arreglando</button>
           <button (click)="cambiarEstadoCita(cita, 'listo')">✅ Listo</button>
         </div>
 
-        <button (click)="editarCita(cita)">✏️ Editar</button>
-        <button (click)="eliminarCita(cita)">🗑️ Eliminar</button>
+        <div class="acciones">
+          <button (click)="editarCita(cita)">✏️ Editar</button>
+          <button (click)="eliminarCita(cita)">🗑️ Eliminar</button>
+        </div>
       </div>
     </div>
   </div>

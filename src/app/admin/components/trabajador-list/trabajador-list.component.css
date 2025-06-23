@@ -50,7 +50,7 @@ h2 {
   color: #555;
 }
 
-.trabajador-card button {
+.eliminar {
   margin-top: 1rem;
   background-color: #dc3545;
   color: white;
@@ -61,8 +61,20 @@ h2 {
   transition: background-color 0.2s ease;
 }
 
-.trabajador-card button:hover {
-  background-color: #c82333;
+.editar {
+  margin-top: 1rem;
+  background-color: #007bff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-right: 5px;
+}
+
+button:hover {
+  opacity: 0.9;
 }
 
 @media (max-width: 600px) {
