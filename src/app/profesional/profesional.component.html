@@ -1,30 +1,31 @@
 <!-- Datos del usuario logueado -->
 <div *ngIf="trabajador" class="trabajador-info">
   <img [src]="trabajador.foto_url" alt="Foto del trabajador" />
-  <p><strong>Nombre:</strong> {{ trabajador.nombre }}</p>
-  <p><strong>Apellidos:</strong> {{ trabajador.apellidos }}</p>
-  <p><strong>Correo:</strong> {{ trabajador.email }}</p>
-  <p><strong>Teléfono:</strong> {{ trabajador.telefono }}</p>
-  <p><strong>Rol:</strong> {{ trabajador.rol }}</p>
+  <div>
+    <p><strong>Nombre:</strong> {{ trabajador.nombre }}</p>
+    <p><strong>Apellidos:</strong> {{ trabajador.apellidos }}</p>
+    <p><strong>Correo:</strong> {{ trabajador.email }}</p>
+    <p><strong>Teléfono:</strong> {{ trabajador.telefono }}</p>
+    <p><strong>Rol:</strong> {{ trabajador.rol }}</p>
 
-  <div *ngIf="trabajador.servicios_asignados?.length">
-    <p><strong>Servicios:</strong> {{ trabajador.servicios_asignados.join(', ') }}</p>
-  </div>
+    <div *ngIf="trabajador.servicios_asignados?.length">
+      <p><strong>Servicios:</strong> {{ trabajador.servicios_asignados.join(', ') }}</p>
+    </div>
 
-  <div *ngIf="trabajador.horario">
-    <p><strong>Horario:</strong></p>
-    <ul>
-      <li *ngFor="let dia of getDias(trabajador.horario)">
-        {{ dia }}: {{ trabajador.horario[dia] }}
-      </li>
-    </ul>
+    <div *ngIf="trabajador.horario">
+      <p><strong>Horario:</strong></p>
+      <ul>
+        <li *ngFor="let dia of getDias(trabajador.horario)">
+          {{ dia }}: {{ trabajador.horario[dia] }}
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 
 <!-- Citas para el usuario -->
 <div *ngIf="citasFiltradas.length > 0" class="citas-container">
   <div *ngFor="let cita of citasFiltradas" class="cita">
-    <button (click)="asignarmeCita(cita)">+</button>
     <p><strong>Nombre cliente:</strong> {{ cita.cliente_nombre }}</p>
     <p><strong>Email cliente:</strong> {{ cita.cliente_email }}</p>
     <p><strong>Teléfono cliente:</strong> {{ cita.cliente_telefono }}</p>
@@ -35,14 +36,17 @@
     <p><strong>Notas cliente:</strong> {{ cita.notas_cliente }}</p>
     <p><strong>Notas profesional:</strong> {{ cita.notas_profesional }}</p>
 
-    <div>
+    <div class="estado-botones">
       <button (click)="cambiarEstadoCita(cita, 'pendiente')">🕒 Pendiente</button>
       <button (click)="cambiarEstadoCita(cita, 'arreglando')">🛠️ Arreglando</button>
       <button (click)="cambiarEstadoCita(cita, 'listo')">✅ Listo</button>
+      <button (click)="asignarmeCita(cita)">+ Añadir a mis tareas</button>
     </div>
 
-    <button (click)="editarCita(cita)">Editar</button>
-    <button (click)="eliminarCita(cita)" class="btn btn-danger">Eliminar</button>
+    <div class="acciones">
+      <button (click)="editarCita(cita)">✏️ Editar</button>
+      <button (click)="eliminarCita(cita)" class="btn btn-danger">🗑️ Eliminar</button>
+    </div>
   </div>
 </div>
 

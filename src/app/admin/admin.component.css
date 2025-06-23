@@ -1,3 +1,38 @@
+/* Información del trabajador */
+.trabajador-info {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  max-width: 800px;
+  display: flex;
+}
+
+.trabajador-info img {
+  width: 150px;
+  height: 150px;
+  border-radius: 100px;
+  margin: 2rem;
+  max-width: 150px;
+}
+
+.trabajador-info p,
+.trabajador-info ul {
+  margin: 0.3rem 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.trabajador-info strong {
+  color: #0288d1;
+}
+
+/* Horario */
+.trabajador-info ul {
+  padding-left: 1.0rem;
+}
+
 h2 {
   text-align: center;
   margin-top: 2rem;
@@ -92,6 +127,23 @@ button:hover {
 
 /* Media query para pantallas pequeñas */
 @media (max-width: 768px) {
+  .trabajador-info {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .trabajador-info img {
+    border-radius: 100px;
+    margin-bottom: 1rem;
+    max-width: 150px;
+  }
+  
   .admin-container {
     flex-direction: column;
   }

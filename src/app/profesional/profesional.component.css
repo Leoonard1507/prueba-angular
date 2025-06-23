@@ -6,11 +6,14 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin: 2rem auto;
   max-width: 800px;
+  display: flex;
 }
 
 .trabajador-info img {
+  width: 150px;
+  height: 150px;
   border-radius: 100px;
-  margin-bottom: 1rem;
+  margin: 2rem;
   max-width: 150px;
 }
 
@@ -61,4 +64,82 @@
 
 .cita strong {
   color: #0077b6;
+}
+
+.estado-botones,
+.acciones {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.estado-botones button:nth-child(1) {
+  background-color: #ffc107;
+}
+
+.estado-botones button:nth-child(2) {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.estado-botones button:nth-child(3) {
+  background-color: #28a745;
+  color: white;
+}
+
+.estado-botones button:nth-child(4) {
+  background-color: #8000ff;
+  color: white;
+}
+
+
+.acciones button:nth-child(1) {
+  background-color: #007bff;
+  color: white;
+}
+
+.acciones button:nth-child(2) {
+  background-color: #dc3545;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* Media query para pantallas pequeñas (ej: móvil) */
+@media (max-width: 600px) {
+  .trabajador-info {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .trabajador-info img {
+    border-radius: 100px;
+    margin-bottom: 1rem;
+    max-width: 150px;
+  }
+
+  .estado-botones,
+  .acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
