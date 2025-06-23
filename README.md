@@ -54,7 +54,7 @@ Estos datos se usarán para acceder como primer usuario a la aplicación, así c
 -En el navbar podremos acceder al login donde introduciremos las credenciales.
 
 -Nos llevará a administrador o a profesional donde encontraremos la información del profesional logueado.
-  -En administrador nos aparecerán dos formuarios uno para crear profesionales y otro para crear citas, Aparecerá una lista con los profesionales que podrán ser eliminados, o editados mediante el mismo formulario con el que se crean, inchando en editar ya carga los datos. Lo mismo ocurre con las citas, se modifican de la misma manera. En las citas aparecerán todos los datos de estas mismas, también se podrá modificar el estado, asignar un profesional, editar o eliminar.
+  -En administrador nos aparecerán dos formuarios uno para crear profesionales y otro para crear citas, una tabla con el CRUD de los servicios, aparecerá una lista con los profesionales que podrán ser eliminados, o editados mediante el mismo formulario con el que se crean, inchando en editar ya carga los datos. Lo mismo ocurre con las citas, se modifican de la misma manera. En las citas aparecerán todos los datos de estas mismas, también se podrá modificar el estado, asignar un profesional, editar o eliminar.
   
   -En profesional podremos crear una nueva cita pinchando en el botón específico para ello, se desplegará un modal con un formulario donde rellenaremos los datos necesarios. También tiene una lista de citas per osolo con las citas en las que los servicios son los mismos que las aptitudes de los mecánicos, pudiendo modificar estado, añadir como una tarea, editar o eliminar. Al editar se vuelve a usar el mismo modal, una vez pulsado el botón de editar se despliega el modal.
 
