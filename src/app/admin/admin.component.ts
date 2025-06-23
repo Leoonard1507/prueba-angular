@@ -7,12 +7,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CrearCitaComponent } from '../crear-editar-cita/crear-editar-cita.component';
 import { CitaService } from '../services/cita.service';
+import { AdminServicesComponent } from './components/admin-services/admin-services.component';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
-  imports: [CrearCitaComponent, FormsModule, TrabajadorAddEditComponent, TrabajadorListComponent, CommonModule],
+  imports: [ AdminServicesComponent, CrearCitaComponent, FormsModule, TrabajadorAddEditComponent, TrabajadorListComponent, CommonModule],
   standalone: true
 })
 export class AdminComponent {
@@ -39,7 +40,6 @@ export class AdminComponent {
       // Se pasa data a objeto
       this.trabajador = JSON.parse(data);
     }
-    console.log(this.trabajador);
   }
 
   // Devolver el nombre de las claves del horario

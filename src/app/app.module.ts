@@ -11,7 +11,8 @@ import { TrabajadorAddEditComponent } from './admin/components/trabajador-add-ed
 import { HomeComponent } from './home/home.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { TrabajadorComponent } from './profesional/profesional.component';
-import { CrearCitaComponent } from './crear-editar-cita/crear-editar-cita.component';  
+import { CrearCitaComponent } from './crear-editar-cita/crear-editar-cita.component';
+import { AdminServicesComponent } from './admin/components/admin-services/admin-services.component';  
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CrearCitaComponent } from './crear-editar-cita/crear-editar-cita.compon
     FullCalendarModule, 
     ReactiveFormsModule, 
     TrabajadorComponent,
+    AdminServicesComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

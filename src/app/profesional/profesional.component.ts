@@ -88,8 +88,6 @@ export class TrabajadorComponent {
       ...cita,
       trabajadorId: this.trabajador.id
     };
-    console.log('Cita asignada:', citaEditada);
-
     // Se llama al servicio para actualizar la cita
     this.citaService.actualizarCita(citaEditada);
     // Refresca la lista

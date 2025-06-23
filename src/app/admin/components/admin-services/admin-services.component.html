@@ -1,0 +1,38 @@
+<h2>Gestión de Servicios</h2>
+
+<!-- Crear nuevo servicio -->
+<div class="nuevo-servicio-form">
+  <input type="text" placeholder="Nombre del servicio" [(ngModel)]="nuevoNombre" />
+  <input type="number" placeholder="Duración (minutos)" [(ngModel)]="nuevaDuracion" min="1" />
+  <button (click)="agregarServicio()">Agregar Servicio</button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Servicio</th>
+      <th>Duración (minutos)</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let servicio of servicios">
+      <td *ngIf="servicioEditado?.nombre !== servicio.nombre">{{ servicio.nombre }}</td>
+      <td *ngIf="servicioEditado?.nombre === servicio.nombre">
+        <input type="text" [(ngModel)]="nuevoNombre" />
+      </td>
+
+      <td *ngIf="servicioEditado?.nombre !== servicio.nombre">{{ servicio.duracion }}</td>
+      <td *ngIf="servicioEditado?.nombre === servicio.nombre">
+        <input type="number" [(ngModel)]="nuevaDuracion" min="1" />
+      </td>
+
+      <td>
+        <button *ngIf="servicioEditado?.nombre !== servicio.nombre" (click)="editarServicio(servicio)">Editar</button>
+        <button *ngIf="servicioEditado?.nombre === servicio.nombre" (click)="guardarCambios()">Guardar</button>
+        <button *ngIf="servicioEditado?.nombre === servicio.nombre" (click)="cancelarEdicion()">Cancelar</button>
+        <button (click)="eliminarServicio(servicio)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
