@@ -15,6 +15,7 @@
   border-radius: 100px;
   margin: 2rem;
   max-width: 150px;
+  object-fit: cover;
 }
 
 .trabajador-info p,
@@ -143,7 +144,7 @@ button:hover {
     margin-bottom: 1rem;
     max-width: 150px;
   }
-  
+
   .admin-container {
     flex-direction: column;
   }

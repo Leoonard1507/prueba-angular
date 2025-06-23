@@ -15,6 +15,7 @@
   border-radius: 100px;
   margin: 2rem;
   max-width: 150px;
+  object-fit: cover;
 }
 
 .trabajador-info p,
@@ -81,6 +82,11 @@ button {
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s ease;
+}
+
+.nuevaCita {
+  width : 100%;
+  margin: 1rem 0
 }
 
 .estado-botones button:nth-child(1) {

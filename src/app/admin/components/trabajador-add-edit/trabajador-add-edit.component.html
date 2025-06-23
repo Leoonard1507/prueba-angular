@@ -73,7 +73,7 @@
     {{ trabajadorParaEditar ? 'Guardar cambios' : 'Agregar Trabajador' }}
   </button>
 
-  <button type="button" *ngIf="trabajadorParaEditar" (click)="cancelarEdicion()">
+  <button class="cancelar" type="button" *ngIf="trabajadorParaEditar" (click)="cancelarEdicion()">
     Cancelar
   </button>
 </form>
