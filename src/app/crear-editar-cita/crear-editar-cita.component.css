@@ -39,7 +39,7 @@ button[type="button"]:hover {
 
 form {
   background-color: #f4f6f8;
-  max-width: 480px;
+  max-width: 600px;
   margin: 1rem auto 2rem auto;
   padding: 2rem 2.5rem;
   border-radius: 12px;
