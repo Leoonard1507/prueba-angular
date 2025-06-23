@@ -15,14 +15,9 @@ export class NavbarComponent {
 
   // Constructor para el rooter
   constructor(private router: Router) {}
-
-  // Al iniciar la página se ejecuta la función
-  ngOnInit(): void {
-    this.comprobarUsuario();
-  }
-
-  // Comprueba si hay un usuario logueado
-  comprobarUsuario(): void {
+  
+  // Función para comprobar si hay un usuario logueado
+  ngDoCheck(): void {
     const data = localStorage.getItem('usuario_logueado');
     this.usuario_logueado = !!data;
   }
